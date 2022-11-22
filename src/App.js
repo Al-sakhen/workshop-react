@@ -10,9 +10,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <hr />
       <User/>
-      <hr />
       <Login/>
       <hr />
       <Register/>

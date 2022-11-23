@@ -6,8 +6,8 @@ export default function Messages() {
         <div>
             <div className="container text-center py-5 my-5 text-center">
                 <div className="card pt-5">
-                    <a href data-toggle="modal" data-target="#profile">
-                    <img src="img/avatar.png" className="avatar " alt />
+                    <a  data-toggle="modal" data-target="#profile">
+                    <img src="img/avatar.png" className="avatar " />
                     </a>
                     <h3 className="py-2">Ahmed Abd Al-Muti</h3>
                     <button data-toggle="modal" data-target="#share" className="btn btn-default-outline share "><i className="fas fa-share-alt" />  Share Profile</button>
@@ -25,9 +25,9 @@ export default function Messages() {
                     </div>
                     <div className="modal-body">
                         <div className="container">
-                        <form action method="post">
-                            <label htmlFor className="text-muted">The file size of the photo should not exceed 7 MB</label>
-                            <input className="form-control" type="file" name="photo" id />
+                        <form method="post">
+                            <label  className="text-muted">The file size of the photo should not exceed 7 MB</label>
+                            <input className="form-control" type="file" name="photo"  />
                         </form>
                         </div>
                     </div>

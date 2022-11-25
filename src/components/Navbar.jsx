@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-export default function Navbar({loginData}) {
+export default function Navbar({loginData,logout}) {
     return (
         <nav className="navbar navbar-expand-lg bg-custom navbar-dark bg-dark ">
             <div className="container">
@@ -28,7 +28,7 @@ export default function Navbar({loginData}) {
                     <Link className="nav-link" to="user">User</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="login">Logout</Link>
+                    <Link className="nav-link" to="login" onClick={logout}>Logout</Link>
                 </li>
                 
                 </ul>

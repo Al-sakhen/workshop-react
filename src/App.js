@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Messages from './components/Messages';
 import { Navigate, Route,Routes } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import Alluser from './components/Alluser';
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -43,6 +44,7 @@ function App() {
           <Route path='home' element={<Home />}></Route>
           <Route path='user' element={ <User />}></Route>
           <Route path='messages' element={<Messages />}></Route>
+          <Route path='alluser' element={<Alluser />}></Route>
           
           </Route>
           <Route path='*' element={<NotFound />}></Route>

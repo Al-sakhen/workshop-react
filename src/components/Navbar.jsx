@@ -11,33 +11,33 @@ export default function Navbar({loginData,logout}) {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 {!loginData?<>
                 <ul className="navbar-nav ml-auto ">
-                {/* <li className="nav-item">
+                <li className="nav-item">
                     <Link className="nav-link" to="alluser">All User</Link>
-                </li> */}
+                </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="register">Register</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="login">Login</Link>
                 </li>
-                
+                <li className="nav-item d-none">
+                        <Link className="nav-link" to="sendmessage">Send Message</Link>
+                    </li>
                 </ul>
                 </>:<>
                 
-                    <ul className="navbar-nav ml-auto ">
+              <ul className="navbar-nav ml-auto ">
                     <li className="nav-item">
                     <Link className="nav-link" to="alluser">All User</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="messages">Messages</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="user">User</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="login" onClick={logout}>Logout</Link>
-                </li>
-                
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="messages">Messages</Link>
+                    </li>
+                    
+                    <li className="nav-item">
+                        <Link className="nav-link" to="login" onClick={logout}>Logout</Link>
+                    </li>
+                    
                 </ul>
                 </>}
                    

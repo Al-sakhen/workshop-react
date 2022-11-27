@@ -1,11 +1,20 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function Alluser() {
-const[posts, setPosts] = useState([])
+const[posts, setPosts] = useState([]);
+let navigate =useNavigate();
+function goToSendmsg(id){
+    navigate({
+        pathname:'/sendmessage',
+        search:`?id=${id}`,
+    }) 
+}
 useEffect(()=>{
     axios.get("http://localhost:3000/api/v1/auth/allusers")
     .then(res =>{
-        setPosts(res.data.users)  
+        setPosts(res.data.users) ;
+        // console.log(res.data.users); 
     })
     .catch(err=>{
         console.log(err);
@@ -13,23 +22,24 @@ useEffect(()=>{
 },[])
 
 const arr = Object.entries(posts).map((post,index)=>{
-    console.log(post[3])
+    // console.log(post[3])
     return(
-        <tr>
+        <tr onClick={ ()=> goToSendmsg(post[1]._id)} key={index}>
             <td>{index++}</td>
             <td>{post[1].userName}</td>
             <td>{post[1].gender}</td>
             <td>{post[1].email}</td> 
-            <td><button type="button" class="btn btn-info">Send messages</button></td>
+            <td><button type="button" className="btn btn-info">Send messages</button></td>
         </tr>
         
     )
   
-})
+}) 
 
   return (
     <div className='container'>
-        <table class="table table-striped table-hover mt-5">
+        <table className="table table-striped table-hover mt-5">
+         <thead>
             <tr className='table-success'>
                  <th>#</th>
                  <td>User Name</td>
@@ -37,7 +47,11 @@ const arr = Object.entries(posts).map((post,index)=>{
                  <td>email</td> 
                  <td></td>                
             </tr>
-            {arr}
+            </thead>
+            <tbody>
+                 {arr} 
+            </tbody>
+           
         </table>
     </div>
   )

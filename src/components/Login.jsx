@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Login({setUserData}) {
   let navigate =useNavigate();
   function goToUser(){
-    let path='/user';
+    let path='/messages';
     navigate(path);
   }
   let navigate2 =useNavigate();
@@ -19,28 +19,30 @@ export default function Login({setUserData}) {
     email: '',
     password: '',
   });
-
+  let [valedatError,setValedateError]=useState([]);
  let [errorMsg,setErrorMsg]=useState();
 
   let submitForm=async(e)=>{
     e.preventDefault();
     let {data}=await axios.post('http://localhost:3000/api/v1/auth/signin',user);
-    // console.log(data);
-    // let validateResult =formValedate();
-    // if ( ()=> validateResult===true){
-    //   setValedateError(validateResult.error.details);
-    // }
-    setLoading(true);
+    console.log(data);
+    let validateResult =formValedate();
+    if ( ()=> validateResult===true){
+      setValedateError(validateResult?.error?.details);
+    }
+    {validateResult?setLoading(false):setLoading(true)}
+    // setLoading(true);
     
     if(data.message=="login"){
      localStorage.setItem('token',data.loginToken);
-     console.log(data.loginToken);
+    //  console.log(data.loginToken);
       setUserData();
       goToUser();
       
     }else{
      setErrorMsg(data.message);
     }
+    
     
     
    
@@ -67,6 +69,9 @@ export default function Login({setUserData}) {
       </div>
       <div className="card p-5 w-50 m-auto">
        {errorMsg?<div className='alert alert-danger'>{errorMsg}</div>: ' '}
+       {/* {valedatError.map( (error,index)=> 
+     <div className='btn btn-danger mb-3' key={index}>{error.message}</div>
+     )} */}
         <form onSubmit={submitForm}>
           <input onChange={formData} className="form-control" placeholder="Enter your email" type="text" name="email" />
           <input onChange={formData} className="form-control my-4 " placeholder="Enter your Password" type="text" name="password" />

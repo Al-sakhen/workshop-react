@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import User from './components/User';
+import SendMessages from './components/SendMessages';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
@@ -42,11 +42,12 @@ function App() {
           <Route element={<ProtectedRoute loginData={loginData} />}>
           <Route path='/' element={<Home />}></Route>
           <Route path='home' element={<Home />}></Route>
-          <Route path='user' element={ <User />}></Route>
-          <Route path='messages' element={<Messages />}></Route>
-          <Route path='alluser' element={<Alluser />}></Route>
           
+          <Route path='messages' element={<Messages />}></Route>
+          {/* <Route path='alluser' element={<Alluser />}></Route> */}
           </Route>
+          <Route path='sendmessage' element={ <SendMessages />}></Route>
+          <Route path='alluser' element={<Alluser />}></Route>
           <Route path='*' element={<NotFound />}></Route>
           <Route path='register' element={<Register />}></Route>
           <Route path='login' element={<Login  setUserData={setUserData} />}></Route>

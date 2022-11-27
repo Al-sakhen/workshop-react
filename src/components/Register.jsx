@@ -24,10 +24,10 @@ export default function Register() {
     let {data}=await axios.post('http://localhost:3000/api/v1/auth/signup',user);
     // console.log(data);
      let valedatResult =formValedate();
-    //  console.log(valedatResult);
-    // if ( (  )=>valedatResult===true) {
-    //   setValedateError(valedatResult.error.details);  
-    // }else{setValedateError( );}
+     console.log(valedatResult);
+    if ( (  )=>valedatResult===true) {
+      setValedateError(valedatResult?.error?.details);  
+    }
     {valedatResult?setLoading(false):setLoading(true)}
     
     if(data.message==="done"){
@@ -38,6 +38,7 @@ export default function Register() {
   let myUser={...user};
   myUser[e.target.name]=e.target.value;
   setUser(myUser);
+  // console.log(user);
  }
  function formValedate(){
   const schema = Joi.object({

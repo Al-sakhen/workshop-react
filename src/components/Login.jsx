@@ -17,13 +17,18 @@ export default function Login({setUserData}) {
         let path='/register';
         navigate2(path);
     }
+    let navigate3 = useNavigate();
+    function goToForget(){
+        let path='/forgotPassword';
+        navigate3(path);
+    }
     let [loading,setLoading] = useState(false);
     let [user,setUser]=useState({
         email: '',
         password: '',
     });
     let [valedatError,setValedateError]=useState([]);
-    let [errorMsg,setErrorMsg]=useState();
+    // let [errorMsg,setErrorMsg]=useState();
 
     let submitForm=async(e)=>{
         e.preventDefault();
@@ -65,6 +70,14 @@ export default function Login({setUserData}) {
         });
         return schema.validate(user,{abortEarly:false});
     }
+
+    //forget
+    // async function forget(){
+    //     let email=user.email;
+    //     console.log(email);
+    //     let {data}=await axios.patch('http://localhost:3000/api/v1/auth/sendCode',email);
+    //     console.log(data);
+    // }
 return (
     <div className="container text-center my-5">
         <div className="user my-3">
@@ -78,9 +91,11 @@ return (
                 <button type='submit' className="btn btn-default-outline my-4 w-100 rounded">
                 {loading?<i className="fas fa-spinner fa-spin"></i>:'Login'}
                 </button>
-                <p><a className="text-muted forgot btn" href="#">I Forgot My Password</a></p>
+                <p><button onClick={goToForget} className="text-muted forgot btn " >I Forgot My Password</button></p>
                 <button onClick={goToRegister} className="btn btn-default-outline" >Register</button>
-            </form>
+            </form>      
+           
+
         </div>
     </div>
 )

@@ -11,6 +11,8 @@ import Alluser from './components/Alluser';
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
                 <Route path='*' element={<NotFound />}></Route>
                 <Route path='register' element={<Register />}></Route>
                 <Route path='login' element={<Login  setUserData={setUserData} />}></Route>
+                <Route path='forgotPassword' element={<ForgotPassword/>}></Route>
+                <Route path='resetPassword' element={<ResetPassword/>}></Route>
             </Routes>
         </>
     );

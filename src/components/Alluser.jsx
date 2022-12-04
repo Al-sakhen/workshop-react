@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 export default function Alluser() {
     const[posts, setPosts] = useState([]);
+    const [filterVal,setfilterVal]=useState('');
+    const [searchApiData,setSearchApiData]=useState([]);
+
     let navigate =useNavigate();
 
     function goToSendmsg(id){
@@ -15,6 +18,7 @@ export default function Alluser() {
         axios.get("http://localhost:3000/api/v1/auth/allusers")
         .then(res =>{
             setPosts(res.data.users) ;
+            setSearchApiData(res.data.users)
         })
         .catch(err=>{
             console.log(err);
@@ -32,9 +36,22 @@ export default function Alluser() {
             </tr>
         )
     }) 
-
+ 
+    const handelFilter=(e)=>{
+        
+        if(e.target.value == ''){
+            setPosts(searchApiData)
+        }else{
+           const filterResult= searchApiData.filter(item=>item.userName.toLowerCase().includes(e.target.value.toLowerCase()))
+           setPosts(filterResult)
+        }
+        setfilterVal(e.target.value)
+    }
     return (
-        <div className='container'>
+       
+       <div className='container'>
+<input className="form-control mt-5" onInput={(e)=>handelFilter(e)} placeholder="Search" aria-label="Search" value={filterVal} />
+
             <table className="table table-striped table-hover mt-5">
                 <thead>
                     <tr className='table-success'>

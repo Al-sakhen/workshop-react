@@ -37,8 +37,11 @@ export default function Login({setUserData}) {
         if ( ()=> validateResult === true){
             setValedateError(validateResult?.error?.details);
         }
-        {validateResult?setLoading(false):setLoading(true)}
-        // setLoading(true);
+        setLoading(true);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, "2000")
         
         if(data.message === "login"){
             localStorage.setItem('token',data.loginToken);
@@ -50,6 +53,8 @@ export default function Login({setUserData}) {
                 toastr.error(`email not exist`);
             }else if(data.message === "password incorrect"){
                 toastr.error(`password incorrect`);
+            }else if(data.messge === "plz confirm your email"){
+                toastr.error(`Please check your email to activate the account!`);
             }else{
                 data.validationArr.forEach(error => {
                     toastr.error(`${error[0].message}`);
@@ -61,7 +66,6 @@ export default function Login({setUserData}) {
         let myUser = {...user};
         myUser[e.target.name] = e.target.value;
         setUser(myUser);
-        //  console.log(myUser);
     }
     function formValedate(){
         const schema = Joi.object({
@@ -71,13 +75,6 @@ export default function Login({setUserData}) {
         return schema.validate(user,{abortEarly:false});
     }
 
-    //forget
-    // async function forget(){
-    //     let email=user.email;
-    //     console.log(email);
-    //     let {data}=await axios.patch('http://localhost:3000/api/v1/auth/sendCode',email);
-    //     console.log(data);
-    // }
 return (
     <div className="container text-center my-5">
         <div className="user my-3">
@@ -86,16 +83,18 @@ return (
         </div>
         <div className="card p-5 w-50 m-auto">
             <form onSubmit={submitForm}>
-                <input onChange={formData} className="form-control" placeholder="Enter your email" type="text" name="email" />
+                <input onChange={formData} className="form-control" placeholder="Enter your email" type="email" name="email" />
                 <input onChange={formData} className="form-control my-4 " placeholder="Enter your Password" type="password" name="password" />
-                <button type='submit' className="btn btn-default-outline my-4 w-100 rounded">
-                {loading?<i className="fas fa-spinner fa-spin"></i>:'Login'}
+                <button type='submit' className="btn btn-default-outline my-4 w-100 rounded" disabled={loading}>
+                    {loading?<i className="fas fa-spinner fa-spin"></i>:'Login'}
                 </button>
-                <p><button onClick={goToForget} className="text-muted forgot btn " >I Forgot My Password</button></p>
-                <button onClick={goToRegister} className="btn btn-default-outline" >Register</button>
+                <button onClick={goToForget} className="text-muted forgot btn d-block m-auto" >
+                    I Forgot My Password
+                </button>
+                <button onClick={goToRegister} className="btn btn-default-outline mt-3" >
+                    Register
+                </button>
             </form>      
-           
-
         </div>
     </div>
 )

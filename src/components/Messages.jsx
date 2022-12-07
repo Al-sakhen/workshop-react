@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import toastr from 'toastr';
-
+import SyncLoader  from "react-spinners/SyncLoader";
 
 export default function Messages({loginData}) {
     let token = localStorage.getItem('token');
     let [userDetails,setuserDetails] = useState([]);
     let [messageList , setMessageList] = useState([]);
-
+    const [loading,setLoading]=useState(false)
     async function deleteMessage(id){
         await axios.delete(`http://localhost:3000/api/v1/message/${id}`, {headers:{'authorization': `tariq__${token}`}})
         .then( (res)=> {
@@ -42,23 +42,24 @@ export default function Messages({loginData}) {
         .then(res =>{
             let {data} = res
             setMessageList(data.messageList)
+            setLoading(true)
+
         })
         .catch(err=>{
             console.log(err);
         })
     }
 
-
-
     useEffect( ()=>{
         async function getUserDetails(){
             let {data} = await axios.get('http://localhost:3000/api/v1/auth/allusers');
             let user = data.users.filter( data => data._id === loginData.id);
             setuserDetails(user);  
+            
         }
         getUserDetails();
 
-        getAllMessages()
+        getAllMessages()       
     }, []);
 
     return (
@@ -119,16 +120,12 @@ export default function Messages({loginData}) {
             </div>
             {/* /modal */}
             {/* =================messages=================== */}
+            {/* {loading ? arr :<div className='spin'><SyncLoader color="#36d7b7"/></div>} */}
             <div className="container text-center my-5 text-center">
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card py-5">
-                            {messageList.length < 1 ?
-                                <>
-                                    <p>You don't have any messages... </p>
-                                </>
-                                :
-                                <>
+                        <>
                                 <table className="table table-striped table-hover mt-5">
                                     <thead >
                                         <tr className='table-black'>
@@ -139,11 +136,11 @@ export default function Messages({loginData}) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {arr}
+                                    {loading ? arr :<div className='spin'><SyncLoader color="#36d7b7"/></div>}
                                     </tbody>
                                 </table>
                                 </>
-                            }
+                            
                         </div>
                     </div>
                 </div>

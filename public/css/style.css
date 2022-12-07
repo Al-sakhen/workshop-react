@@ -152,3 +152,11 @@ body{
   background: #69a6ce;
   color: #fff;
 }
+.spin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 206px;
+  height: 100%;
+}

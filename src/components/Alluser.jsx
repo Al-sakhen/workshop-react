@@ -1,11 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import * as ReactBootStrap from 'react-bootstrap'
+import SyncLoader  from "react-spinners/SyncLoader";
+
 export default function Alluser() {
     const[posts, setPosts] = useState([]);
     const [filterVal,setfilterVal]=useState('');
     const [searchApiData,setSearchApiData]=useState([]);
-
+    const [loading,setLoading]=useState(false)
     let navigate =useNavigate();
 
     function goToSendmsg(id){
@@ -19,7 +22,9 @@ export default function Alluser() {
         .then(res =>{
             setPosts(res.data.users) ;
             setSearchApiData(res.data.users)
+            setLoading(true)
         })
+        
         .catch(err=>{
             console.log(err);
         })
@@ -48,11 +53,12 @@ export default function Alluser() {
         setfilterVal(e.target.value)
     }
     return (
-       
+      
        <div className='container'>
 <input className="form-control mt-5" onInput={(e)=>handelFilter(e)} placeholder="Search" aria-label="Search" value={filterVal} />
-
+     
             <table className="table table-striped table-hover mt-5">
+         
                 <thead>
                     <tr className='table-success'>
                         <th>#</th>
@@ -63,7 +69,10 @@ export default function Alluser() {
                     </tr>
                 </thead>
                 <tbody>
-                    {arr} 
+                    {/* {arr}  */}
+                    {/* {loading ? arr : <div className='spin'><ReactBootStrap.Spinner  animation='border'/></div>} */}
+
+                    {loading ? arr :<div className='spin'><SyncLoader color="#36d7b7"/></div>}
                 </tbody>
             </table>
         </div>

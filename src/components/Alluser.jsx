@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import * as ReactBootStrap from 'react-bootstrap'
 import SyncLoader  from "react-spinners/SyncLoader";
 
 export default function Alluser() {
@@ -43,22 +42,18 @@ export default function Alluser() {
     }) 
  
     const handelFilter=(e)=>{
-        
         if(e.target.value == ''){
             setPosts(searchApiData)
         }else{
-           const filterResult= searchApiData.filter(item=>item.userName.toLowerCase().includes(e.target.value.toLowerCase()))
-           setPosts(filterResult)
+            const filterResult= searchApiData.filter(item=>item.userName.toLowerCase().includes(e.target.value.toLowerCase()))
+            setPosts(filterResult)
         }
         setfilterVal(e.target.value)
     }
     return (
-      
-       <div className='container'>
-<input className="form-control mt-5" onInput={(e)=>handelFilter(e)} placeholder="Search" aria-label="Search" value={filterVal} />
-     
+        <div className='container'>
+            <input className="form-control mt-5" onInput={(e)=>handelFilter(e)} placeholder="Search" aria-label="Search" value={filterVal} />
             <table className="table table-striped table-hover mt-5">
-         
                 <thead>
                     <tr className='table-success'>
                         <th>#</th>
@@ -69,9 +64,6 @@ export default function Alluser() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {arr}  */}
-                    {/* {loading ? arr : <div className='spin'><ReactBootStrap.Spinner  animation='border'/></div>} */}
-
                     {loading ? arr :<div className='spin'><SyncLoader color="#36d7b7"/></div>}
                 </tbody>
             </table>

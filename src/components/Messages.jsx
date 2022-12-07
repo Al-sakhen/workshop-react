@@ -118,9 +118,7 @@ export default function Messages({loginData}) {
                     </div>
                 </div>
             </div>
-            {/* /modal */}
             {/* =================messages=================== */}
-            {/* {loading ? arr :<div className='spin'><SyncLoader color="#36d7b7"/></div>} */}
             <div className="container text-center my-5 text-center">
                 <div className="row">
                     <div className="col-md-12">
